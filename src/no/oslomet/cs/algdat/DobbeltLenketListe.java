@@ -106,7 +106,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+        // Vi kalle klassen her
+        Node node = new Node(hode);
+        // Vi kjekke om noden er tom
+        if (node.verdi==null){
+            throw new UnsupportedOperationException("Node er tom");
+        }else {
+            //Vi rome listen ved å flytte pekeren videre
+            Node<T> p = hode, q = null;
+
+            while (p != null)
+            {
+                q = p.neste;
+                p.neste = null;
+                p.verdi = null;
+                p = q;
+            }
+
+            hode = hale = null;
+            antall = 0;
+        }
+        System.out.println(node.verdi);
     }
 
     @Override
@@ -163,7 +183,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
     }
-
+    
 } // class DobbeltLenketListe
 
 
