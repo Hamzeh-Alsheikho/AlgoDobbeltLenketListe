@@ -17,6 +17,7 @@ import java.util.function.Predicate;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 
+
     /**
      * Node class
      * @param <T>
@@ -43,108 +44,132 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     public Liste<T> subliste(int fra, int til){
-        throw new UnsupportedOperationException();
+
+        //throw new UnsupportedOperationException();
+        return subliste(0,10);
     }
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return 0;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return true;
     }
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return true;
     }
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
     }
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return inneholder(verdi);
     }
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return hent(indeks);
     }
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return indeksTil(verdi);
     }
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return oppdater(indeks,nyverdi);
     }
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return fjern(verdi);
     }
 
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return fjern(indeks);
     }
 
     @Override
     public void nullstill() {
-        // Vi kalle klassen her
-        Node node = new Node(hode);
+        //throw new UnsupportedOperationException();
+        // Alternative 2
+       // Vi kalle klassen her
+        Node node = new Node(hode, hale,null);
         // Vi kjekke om noden er tom
         if (node.verdi==null){
-            throw new UnsupportedOperationException("Node er tom");
+            return;
         }else {
             //Vi rome listen ved å flytte pekeren videre
-            Node<T> p = hode, q = null;
+            Node<T> p = hode, q = hale;
 
             while (p != null)
             {
-                q = p.neste;
-                p.neste = null;
-                p.verdi = null;
-                p = q;
+                p = q.neste;
+                q.neste = null;
+                q.verdi = null;
+                q = p;
             }
-
             hode = hale = null;
             antall = 0;
         }
-        System.out.println(node.verdi);
+        System.out.println(node);
+        // Alternative 2
+        // Vi loper gjennom hele arrya og slutte elementer en og en
+        for (Iterator<T> i = iterator(); i.hasNext(); )
+        {
+            i.next();
+            i.remove();
+        }
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return omvendtString();
     }
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return iterator();
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return iterator();
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -170,18 +195,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next(){
-            throw new UnsupportedOperationException();
+            //throw new UnsupportedOperationException();
+            return next();
         }
 
         @Override
         public void remove(){
-            throw new UnsupportedOperationException();
+            //throw new UnsupportedOperationException();
         }
 
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
     
 } // class DobbeltLenketListe
