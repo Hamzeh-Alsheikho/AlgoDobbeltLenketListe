@@ -73,14 +73,35 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        //throw new UnsupportedOperationException();
+     //Den første skal returnere antallet verdier i listen
+
+        /*
+
+        I think this is the code we need to use in antall. Kompendie programkode 3.1.2 b;
+
+        int antall = 0;
+         for (T t : this) antall++;
+         return antall;
+
+         */
         return 0;
+
     }
 
     @Override
     public boolean tom() {
-        //throw new UnsupportedOperationException();
+        //  Den andre skal returnere true/false avhengig av om listen er tom eller ikke
+        /*
+
+        if (count == 0)
+            return true;
+
+        if (count != 0)
+            return false;
+         */
+
         return true;
+
     }
 
     @Override
