@@ -46,9 +46,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe() {
         //throw new UnsupportedOperationException();
     }
+    public DobbeltLenketListe(T[] verdiArray) {
+        Node<T> forrige = null;
+        Node<T> nyNode = null;
 
-    public DobbeltLenketListe(T[] a) {
-        //throw new UnsupportedOperationException();
+        for(T verdi: verdiArray) {
+            antall++;
+            nyNode = new Node<>(verdi, forrige, null);
+
+            if (forrige != null) {
+                forrige.neste = nyNode;
+            } else {
+                hode = nyNode;
+            }
+
+            forrige = nyNode;
+        }
+        hale = nyNode;
     }
 
     public Liste<T> subliste(int fra, int til){
