@@ -4,6 +4,7 @@ package no.oslomet.cs.algdat;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
+import javax.swing.*;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
@@ -47,10 +48,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
     }
     public DobbeltLenketListe(T[] a) {
+
+        if ( a== null){
+            throw new NullPointerException("Tabellen a er null");
+        }
+
         Node<T> forrige = null;
         Node<T> nyNode = null;
 
         for(T verdi: a) {
+            if (verdi ==null)
+                continue;
             antall++;
             nyNode = new Node<>(verdi, forrige, null);
 
@@ -86,7 +94,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return false;
         }
 
-    @Override
+    @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
         //throw new UnsupportedOperationException();
         return true;
@@ -98,7 +106,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
-    @Override
+    @Override // Opg. 3 b.
     public boolean inneholder(T verdi) {
         //throw new UnsupportedOperationException();
         return inneholder(verdi);
