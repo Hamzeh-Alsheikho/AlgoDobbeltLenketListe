@@ -181,32 +181,54 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override //Opgav 2.
     public String toString() {
-        // This is a string joiner -            // seperatet, brackets.
-        StringJoiner prøve = new StringJoiner(", ", "[", "]");
 
-        //How to print a list forward.
-        Node q = hode;
-        while (q != null)
-            System.out.println(q.verdi + ",");
-        q = q.neste;
+        StringBuilder sForward = new StringBuilder();
 
-        System.out.println("[]");
+        sForward.append('[');
 
-        //throw new UnsupportedOperationException();
-        return toString();
+        if (!tom())
+        {
+            Node<T> p = hode;
+            sForward.append(p.verdi);
+
+            p = p.neste;
+
+            while (p != null)  // tar med resten hvis det er noe mer
+            {
+                sForward.append(',').append(' ').append(p.verdi);
+                p = p.neste;
+            }
+        }
+
+        sForward.append(']');
+
+        return sForward.toString();
     }
 
     public String omvendtString() {
 
-        //How to print list backwards
-        Node qbackw = hale;
-        while (qbackw != null)
-            System.out.println(qbackw.verdi + ",");
-        qbackw= qbackw.forrige;
+            StringBuilder sBackwards = new StringBuilder();
 
-        System.out.println("[]");
-        //throw new UnsupportedOperationException();
-        return omvendtString();
+            sBackwards.append('[');
+
+            if (!tom())
+            {
+                Node<T> q = hale;
+                sBackwards.append(q.verdi);
+
+                q = q.forrige;
+
+                while (q != null)  // tar med resten hvis det er noe mer
+                {
+                    sBackwards.append(',').append(' ').append(q.verdi);
+                    q = q.forrige;
+                }
+            }
+
+            sBackwards.append(']');
+
+            return sBackwards.toString();
+
     }
 
     @Override
