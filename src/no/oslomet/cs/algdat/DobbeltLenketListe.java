@@ -179,13 +179,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
-    @Override
+    @Override //Opgav 2.
     public String toString() {
+        // This is a string joiner -            // seperatet, brackets.
+        StringJoiner prøve = new StringJoiner(", ", "[", "]");
+
+        //How to print a list forward.
+        Node q = hode;
+        while (q != null)
+            System.out.println(q.verdi + ",");
+        q = q.neste;
+
+        System.out.println("[]");
+
         //throw new UnsupportedOperationException();
         return toString();
     }
 
     public String omvendtString() {
+
+        //How to print list backwards
+        Node qbackw = hale;
+        while (qbackw != null)
+            System.out.println(qbackw.verdi + ",");
+        qbackw= qbackw.forrige;
+
+        System.out.println("[]");
         //throw new UnsupportedOperationException();
         return omvendtString();
     }

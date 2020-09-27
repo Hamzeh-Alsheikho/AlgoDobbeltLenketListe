@@ -27,6 +27,15 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
-* Oppgave 1: Løste ved å implementere..
+* Oppgave 1: The biggest challenges in task 1 were to get value with zero not to be counted in a. 
+After much reseach it was solved by a single code; 
+if (value == null)
+continue;
+It was also a challenge to find out if NullPointerException could be performed with a common throw exception, or if more code was needed. As an example 3.3.2. in the compendium. 
+This was solved by using:
+if (a == null) {
+throw new NullPointerException ("The table is null");
+
+
 * Oppgave 2: ...
 
