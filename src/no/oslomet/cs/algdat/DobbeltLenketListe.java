@@ -61,11 +61,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 continue;
             antall++;
             nyNode = new Node<>(verdi, forrige, null);
-
+            endringer++;
             if (forrige != null) {
                 forrige.neste = nyNode;
             } else {
                 hode = nyNode;
+
             }
 
             forrige = nyNode;
@@ -77,13 +78,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Liste<T> subliste(int fra, int til){
 
         //throw new UnsupportedOperationException();
-        return subliste(0,10);
+        return subliste(0,1);
     }
 
     @Override
     public int antall() {
          return antall;
-
     }
 
     @Override
@@ -96,14 +96,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
-
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
         if (antall == 0)  hode = hale = new Node<>( null);  // tom liste
         else hale = hale.neste = new Node<>( null);         // legges bakerst
 
         antall++;
-
-        //throw new UnsupportedOperationException();
-        return true;
+       return true;
     }
 
     @Override
@@ -214,7 +212,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder sForward = new StringBuilder();
 
         sForward.append('[');
-
+        if (tom()){
+            return "[]";
+        }
         if (!tom())
         {
             Node<T> p = hode;
@@ -230,7 +230,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         sForward.append(']');
-
         return sForward.toString();
     }
 

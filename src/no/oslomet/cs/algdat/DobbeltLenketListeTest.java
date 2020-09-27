@@ -140,7 +140,7 @@ class DobbeltLenketListeTest {
 
     ////// Oppgave 2 /////////////////////
     @org.junit.jupiter.api.Test
-    void oppgave2() {
+    void  oppgave2() {
         int antallFeil = 0;
 
         DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
