@@ -24,9 +24,6 @@ public class Main {
        // DobbeltLenketListe<String> stringDobbeltLenketListe = new DobbeltLenketListe<>(new String[]{"a", "b", "c"});
        // System.out.println("hi");
 
-        String[] s = { "Ole" , null , "Per" , "Kari ", null };
-        Liste<String> liste = new DobbeltLenketListe<>(null);
-        System. out .println(liste. antall () + " " + liste. tom ());
     }
 }
 

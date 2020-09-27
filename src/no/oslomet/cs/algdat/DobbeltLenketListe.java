@@ -96,12 +96,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
+
+        if (antall == 0)  hode = hale = new Node<>( null);  // tom liste
+        else hale = hale.neste = new Node<>( null);         // legges bakerst
+
+        antall++;
+
         //throw new UnsupportedOperationException();
         return true;
     }
 
     @Override
     public void leggInn(int indeks, T verdi) {
+
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
+        if (indeks == 0)                     // ny verdi skal ligge først
+        {
+            hode = new Node<>(verdi,null, hode);    // legges først
+            if (antall == 0) hale = hode;      // hode og hale går til samme node
+        }
+        else if (indeks == antall)           // ny verdi skal ligge bakerst
+        {
+            hale = hale.neste = new Node<>( null);  // legges bakerst
+        }
+        else
+        {
+            Node<T> p = hode;                  // p flyttes indeks - 1 ganger
+            for (int i = 1; i < indeks; i++) p = p.neste;
+
+            p.neste = new Node<>(verdi,null, p.neste);  // verdi settes inn i listen
+        }
+
+        antall++;                            // listen har fått en ny verdi
+
+
         //throw new UnsupportedOperationException();
 
     }
