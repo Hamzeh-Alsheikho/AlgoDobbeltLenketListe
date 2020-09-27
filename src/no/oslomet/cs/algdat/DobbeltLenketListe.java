@@ -120,8 +120,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        //throw new UnsupportedOperationException();
-        return indeksTil(verdi);
+        Iterator<T> i = iterator();
+        for (int indeks = 0; i.hasNext(); indeks++)
+        {
+            if (i.next().equals(verdi)) return indeks;
+        }
+        return -1;
     }
 
     @Override
