@@ -101,11 +101,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
+
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
-        if (antall == 0)  hode = hale = new Node<>(verdi, null,null);  // tom liste
-        else
-            hale = hale.neste = new Node<>( verdi,hale.forrige, null);// legges bakerst
-        // hode = hode.forrige = new Node<>(verdi,null,hode.neste);// legges først
+
+        if (antall == 0){
+            hode  = new Node<>(verdi, null,null);
+            hode = hale;
+        }
+
+
+        else {
+            hale.neste = new Node<>(verdi, hale, null);
+            hale = hale.neste;
+        }
 
         antall++;
 
@@ -143,8 +151,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override // Opg. 3 b.
     public boolean inneholder(T verdi) {
-        //throw new UnsupportedOperationException();
-        return inneholder(verdi);
+
+        return indeksTil(verdi) != -1;
     }
 
     @Override
@@ -155,10 +163,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        Iterator<T> i = iterator();
-        for (int indeks = 0; i.hasNext(); indeks++)
+        if (verdi == null) return -1;
+
+        Node<T> p = hode;
+
+        for (int indeks = 0; indeks < antall ; indeks++)
         {
-            if (i.next().equals(verdi)) return indeks;
+            if (p.verdi.equals(verdi)) return indeks;
+            p = p.neste;
         }
         return -1;
     }
@@ -262,16 +274,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             while (q != null)  // tar med resten hvis det er noe mer
             {
                 sBackwards.append(',').append(' ').append(q.verdi);
-                //q = q.forrige;
+                q = q.forrige;
 
-                Node<T> temp = null;
+               /* Node<T> temp = null;
                 Node<T> current = q;
                 while (current != null) {
                     temp = current.forrige;
                     current.forrige = current.neste;
                     current.neste = temp;
                     current = current.forrige;
-                }
+                }*/
 
 
             }
