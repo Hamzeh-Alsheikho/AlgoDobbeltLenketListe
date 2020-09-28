@@ -168,7 +168,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean fjern(T verdi) {
         //throw new UnsupportedOperationException();
-        return fjern(verdi);
+        if (verdi == null) return false;          // ingen nullverdier i listen
+
+        Node<T> q = hode, p = null;               // hjelpepekere
+
+        while (q != null)                         // q skal finne verdien t
+        {
+            if (q.verdi.equals(verdi)) break;       // verdien funnet
+            p = q; q = q.neste;                     // p er forgjengeren til q
+        }
+
+        if (q == null) return false;              // fant ikke verdi
+        else if (q == hode) hode = hode.neste;    // går forbi q
+        else p.neste = q.neste;                   // går forbi q
+
+        if (q == hale) hale = p;                  // oppdaterer hale
+
+        q.verdi = null;                           // nuller verdien til q
+        q.neste = null;                           // nuller nestepeker
+
+        antall--;                                 // en node mindre i listen
+
+        return true;
     }
 
     @Override
@@ -180,34 +201,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void nullstill() {
         //throw new UnsupportedOperationException();
-        // Alternative 2
-        // Vi kalle klassen her
-        Node node = new Node(hode, hale,null);
-        // Vi kjekke om noden er tom
-        if (node.verdi==null){
-            return;
-        }else {
+        // Alternative 1
             //Vi rome listen ved å flytte pekeren videre
-            Node<T> p = hode, q = hale;
+            Node<T> p = hode, q;
 
             while (p != null)
             {
-                p = q.neste;
+                q=p;
+                p = p.neste;
                 q.neste = null;
                 q.verdi = null;
-                q = p;
             }
             hode = hale = null;
             antall = 0;
-        }
-        System.out.println(node);
+
         // Alternative 2
         // Vi loper gjennom hele arrya og slutte elementer en og en
-        for (Iterator<T> i = iterator(); i.hasNext(); )
-        {
-            i.next();
-            i.remove();
-        }
+
     }
 
     @Override //Opgav 2.
@@ -320,6 +330,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public void remove(){
             //throw new UnsupportedOperationException();
+            if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
+
+            fjernOK = false;               // remove() kan ikke kalles på nytt
+            Node<T> q = hode, p=hale;              // hjelpevariabel
+
+            if (hode.neste == p)           // skal den første fjernes?
+            {
+                hode = hode.neste;           // den første fjernes
+                if (p == null) hale = null;  // dette var den eneste noden
+            }
+            else
+            {
+                Node<T> r = hode;            // må finne forgjengeren
+                // til forgjengeren til p
+                while (r.neste.neste != p)
+                {
+                    r = r.neste;               // flytter r
+                }
+
+                q = r.neste;                 // det er q som skal fjernes
+                r.neste = p;                 // "hopper" over q
+                if (p == null) hale = r;     // q var den siste
+            }
+
+            q.verdi = null;                // nuller verdien i noden
+            q.neste = null;                // nuller nestereferansen
+
+            antall--;
         }
 
     } // class DobbeltLenketListeIterator
