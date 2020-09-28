@@ -187,14 +187,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void nullstill() {
         //throw new UnsupportedOperationException();
-        // Alternative 2
-        // Vi kalle klassen her
-        Node node = new Node(hode, hale,null);
-        // Vi kjekke om noden er tom
-        if (node.verdi==null){
-            return;
-        }else {
-            //Vi rome listen ved å flytte pekeren videre
             Node<T> p = hode, q = hale;
 
             while (p != null)
@@ -206,15 +198,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
             hode = hale = null;
             antall = 0;
-        }
-        System.out.println(node);
-        // Alternative 2
-        // Vi loper gjennom hele arrya og slutte elementer en og en
-        for (Iterator<T> i = iterator(); i.hasNext(); )
-        {
-            i.next();
-            i.remove();
-        }
+        // Alternative 1
+        // This elternative is the best in time condtions, 15ms,
+        // because it dosen't run throw the array evey single time.
     }
 
     @Override //Opgav 2.
