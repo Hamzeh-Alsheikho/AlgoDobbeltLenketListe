@@ -69,6 +69,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
             forrige = nyNode;
+            endringer++;
         }
         hale = nyNode;
     }
@@ -82,27 +83,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-         return antall;
+        return antall;
 
     }
 
     @Override
     public boolean tom() {
         if (antall() == 0){
-        return true;}
+            return true;}
         else
             return false;
-        }
+    }
 
     @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
-
-        if (antall == 0)  hode = hale = new Node<>( null);  // tom liste
-        else hale = hale.neste = new Node<>( null);         // legges bakerst
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        if (antall == 0)  hode = hale = new Node<>(verdi, null,null);  // tom liste
+        else
+            hale = hale.neste = new Node<>( verdi,hale.forrige, null);// legges bakerst
+        // hode = hode.forrige = new Node<>(verdi,null,hode.neste);// legges først
 
         antall++;
 
-        //throw new UnsupportedOperationException();
         return true;
     }
 
@@ -113,12 +115,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
         if (indeks == 0)                     // ny verdi skal ligge først
         {
-            hode = new Node<>(verdi,null, hode);    // legges først
+            hode = new Node<>(verdi,null, hode.neste);    // legges først
             if (antall == 0) hale = hode;      // hode og hale går til samme node
         }
-        else if (indeks == antall)           // ny verdi skal ligge bakerst
+        else if (indeks == antall)          // ny verdi skal ligge bakerst
         {
-            hale = hale.neste = new Node<>( null);  // legges bakerst
+            hale = hale.neste = new Node<>(verdi,hale.forrige, null);// legges bakerst
         }
         else
         {
@@ -179,7 +181,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         //throw new UnsupportedOperationException();
         // Alternative 2
-       // Vi kalle klassen her
+        // Vi kalle klassen her
         Node node = new Node(hode, hale,null);
         // Vi kjekke om noden er tom
         if (node.verdi==null){
@@ -213,6 +215,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         StringBuilder sForward = new StringBuilder();
 
+        if(tom())
+            return "[]";
+
         sForward.append('[');
 
         if (!tom())
@@ -236,27 +241,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public String omvendtString() {
 
-            StringBuilder sBackwards = new StringBuilder();
+        StringBuilder sBackwards = new StringBuilder();
 
-            sBackwards.append('[');
+        if(tom())
+            return "[]";
 
-            if (!tom())
+        sBackwards.append('[');
+
+        if (!tom())
+        {
+            Node<T> q = hale;
+            sBackwards.append(q.verdi);
+
+            q = q.forrige;
+
+            while (q != null)  // tar med resten hvis det er noe mer
             {
-                Node<T> q = hale;
-                sBackwards.append(q.verdi);
+                sBackwards.append(',').append(' ').append(q.verdi);
+                //q = q.forrige;
 
-                q = q.forrige;
-
-                while (q != null)  // tar med resten hvis det er noe mer
-                {
-                    sBackwards.append(',').append(' ').append(q.verdi);
-                    q = q.forrige;
+                Node<T> temp = null;
+                Node<T> current = q;
+                while (current != null) {
+                    temp = current.forrige;
+                    current.forrige = current.neste;
+                    current.neste = temp;
+                    current = current.forrige;
                 }
+
+
             }
+        }
 
-            sBackwards.append(']');
+        sBackwards.append(']');
 
-            return sBackwards.toString();
+        return sBackwards.toString();
 
     }
 
@@ -308,7 +327,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         //throw new UnsupportedOperationException();
     }
-    
+
 } // class DobbeltLenketListe
 
 
