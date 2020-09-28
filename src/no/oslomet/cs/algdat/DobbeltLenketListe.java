@@ -15,12 +15,12 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 
-
 public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     /**
      * Node class
+     *
      * @param <T>
      */
     private static final class Node<T> {
@@ -53,15 +53,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) {
 
-        if ( a== null){
+        if (a == null) {
             throw new NullPointerException("Tabellen a er null");
         }
 
         Node<T> forrige = null;
         Node<T> nyNode = null;
 
-        for(T verdi: a) {
-            if (verdi ==null)
+        for (T verdi : a) {
+            if (verdi == null)
                 continue;
             antall++;
             nyNode = new Node<>(verdi, forrige, null);
@@ -79,10 +79,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
 
-    public Liste<T> subliste(int fra, int til){
+    public Liste<T> subliste(int fra, int til) {
 
         //throw new UnsupportedOperationException();
-        return subliste(0,10);
+        return subliste(0, 10);
     }
 
     @Override
@@ -93,18 +93,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-        if (antall() == 0){
-            return true;}
-        else
+        if (antall() == 0) {
+            return true;
+        } else
             return false;
     }
 
     @Override // Opg 2, b.
     public boolean leggInn(T verdi) {
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
-        if (antall == 0)  hode = hale = new Node<>(verdi, null,null);  // tom liste
+        if (antall == 0) hode = hale = new Node<>(verdi, null, null);  // tom liste
         else
-            hale = hale.neste = new Node<>( verdi,hale.forrige, null);// legges bakerst
+            hale = hale.neste = new Node<>(verdi, hale.forrige, null);// legges bakerst
         // hode = hode.forrige = new Node<>(verdi,null,hode.neste);// legges først
 
         antall++;
@@ -119,19 +119,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
         if (indeks == 0)                     // ny verdi skal ligge først
         {
-            hode = new Node<>(verdi,null, hode.neste);    // legges først
+            hode = new Node<>(verdi, null, hode.neste);    // legges først
             if (antall == 0) hale = hode;      // hode og hale går til samme node
-        }
-        else if (indeks == antall)          // ny verdi skal ligge bakerst
+        } else if (indeks == antall)          // ny verdi skal ligge bakerst
         {
-            hale = hale.neste = new Node<>(verdi,hale.forrige, null);// legges bakerst
-        }
-        else
-        {
+            hale = hale.neste = new Node<>(verdi, hale.forrige, null);// legges bakerst
+        } else {
             Node<T> p = hode;                  // p flyttes indeks - 1 ganger
             for (int i = 1; i < indeks; i++) p = p.neste;
 
-            p.neste = new Node<>(verdi,null, p.neste);  // verdi settes inn i listen
+            p.neste = new Node<>(verdi, null, p.neste);  // verdi settes inn i listen
         }
 
         antall++;                            // listen har fått en ny verdi
@@ -144,7 +141,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override // Opg. 3 b.
     public boolean inneholder(T verdi) {
         //throw new UnsupportedOperationException();
-        return inneholder(verdi);
+        return indeksTil(verdi) != -1;
     }
 
     @Override
@@ -156,9 +153,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int indeksTil(T verdi) {
         Iterator<T> i = iterator();
-        for (int indeks = 0; i.hasNext(); indeks++)
-        {
-            if (i.next().equals(verdi)) return indeks;
+        for (int indeks = 0; i.hasNext(); indeks++) {
+            if (i.next().equals(verdi))
+                return indeks;
         }
         return -1;
     }
@@ -166,7 +163,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T oppdater(int indeks, T nyverdi) {
         //throw new UnsupportedOperationException();
-        return oppdater(indeks,nyverdi);
+        return oppdater(indeks, nyverdi);
     }
 
     @Override
@@ -179,7 +176,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         while (q != null)                         // q skal finne verdien t
         {
             if (q.verdi.equals(verdi)) break;       // verdien funnet
-            p = q; q = q.neste;                     // p er forgjengeren til q
+            p = q;
+            q = q.neste;                     // p er forgjengeren til q
         }
 
         if (q == null) return false;              // fant ikke verdi
@@ -206,21 +204,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         //throw new UnsupportedOperationException();
         // Alternative 1
-            //Vi rome listen ved å flytte pekeren videre
-            Node<T> p = hode, q;
-
-            while (p != null)
-            {
-                q=p;
-                p = p.neste;
-                q.neste = null;
-                q.verdi = null;
-            }
-            hode = hale = null;
-            antall = 0;
+        //Vi rome listen ved å flytte pekeren videre
+        Node<T> p = hode, q;
+        while (p != null) {
+            q = p;
+            p = p.neste;
+            q.neste = null;
+            q.verdi = null;
+        }
+        hode = hale = null;
+        antall = 0;
 
         // Alternative 2
         // Vi loper gjennom hele arrya og slutte elementer en og en
+
+    }
+
+    public void nullstil2() {
+
+        while(!tom()) {
+            fjern(0);
+        }
 
     }
 
@@ -229,13 +233,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         StringBuilder sForward = new StringBuilder();
 
-        if(tom())
+        if (tom())
             return "[]";
 
         sForward.append('[');
 
-        if (!tom())
-        {
+        if (!tom()) {
             Node<T> p = hode;
             sForward.append(p.verdi);
 
@@ -257,13 +260,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         StringBuilder sBackwards = new StringBuilder();
 
-        if(tom())
+        if (tom())
             return "[]";
 
         sBackwards.append('[');
 
-        if (!tom())
-        {
+        if (!tom()) {
             Node<T> q = hale;
             sBackwards.append(q.verdi);
 
@@ -304,52 +306,48 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return iterator();
     }
 
-    private class DobbeltLenketListeIterator implements Iterator<T>
-    {
+    private class DobbeltLenketListeIterator implements Iterator<T> {
         private Node<T> denne;
         private boolean fjernOK;
         private int iteratorendringer;
 
-        private DobbeltLenketListeIterator(){
+        private DobbeltLenketListeIterator() {
             denne = hode;     // p starter på den første i listen
             fjernOK = false;  // blir sann når next() kalles
             iteratorendringer = endringer;  // teller endringer
         }
 
-        private DobbeltLenketListeIterator(int indeks){
+        private DobbeltLenketListeIterator(int indeks) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean hasNext(){
+        public boolean hasNext() {
             return denne != null;
         }
 
         @Override
-        public T next(){
+        public T next() {
             //throw new UnsupportedOperationException();
             return next();
         }
 
         @Override
-        public void remove(){
+        public void remove() {
             //throw new UnsupportedOperationException();
             if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
 
             fjernOK = false;               // remove() kan ikke kalles på nytt
-            Node<T> q = hode, p=hale;              // hjelpevariabel
+            Node<T> q = hode, p = hale;              // hjelpevariabel
 
             if (hode.neste == p)           // skal den første fjernes?
             {
                 hode = hode.neste;           // den første fjernes
                 if (p == null) hale = null;  // dette var den eneste noden
-            }
-            else
-            {
+            } else {
                 Node<T> r = hode;            // må finne forgjengeren
                 // til forgjengeren til p
-                while (r.neste.neste != p)
-                {
+                while (r.neste.neste != p) {
                     r = r.neste;               // flytter r
                 }
 
