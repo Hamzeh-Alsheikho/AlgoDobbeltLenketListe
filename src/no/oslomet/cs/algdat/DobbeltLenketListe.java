@@ -195,14 +195,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return p;
         }
 
-        int pivot1 = antall / 2;
-
-        if (indeks > 0 && indeks < antall / 2)
-            for (int i = 1; i < pivot1; i++)
+        if (indeks < antall / 2) {
+            for (int i = 1; i < antall / 2; i++)
                 return p = p.neste;
-
-        for (int j = pivot1; j < antall - 1; j++) {
-            return p = p.neste;
+        }
+        else {
+            for (int j = antall / 2; j < antall - 1; j++) {
+                return p = p.neste;
+            }
         }
         return p;
     }
