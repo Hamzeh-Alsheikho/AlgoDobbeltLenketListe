@@ -370,7 +370,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Iterator<T> iterator(int indeks) {
         //throw new UnsupportedOperationException();
-        return new DobbeltLenketListeIterator();
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T>
@@ -387,7 +387,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         private DobbeltLenketListeIterator(int indeks){
             //throw new UnsupportedOperationException();
-
+            denne = (Node<T>) hent(indeks);     // p starter på den første i listen
+            fjernOK = false;  // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
         @Override
@@ -398,7 +400,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public T next(){
             //throw new UnsupportedOperationException();
-            Node<T> p=null;
+            Node<T> p=denne;
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
 
             fjernOK = true;            // nå kan remove() kalles
@@ -411,7 +413,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public void remove(){
             //throw new UnsupportedOperationException();
-            Node<T> p=hode;
+            Node<T> p=denne;
             if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
 
             fjernOK = false;               // remove() kan ikke kalles på nytt
@@ -428,7 +430,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 // til forgjengeren til p
                 while (r.neste.neste != p)
                 {
-                    r = r.neste;               // flytter r
+                    r = r.neste;// flytter r
                 }
 
                 q = r.neste;                 // det er q som skal fjernes
@@ -445,23 +447,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     } // class DobbeltLenketListeIterator
 
-      // betingelsesfjerning
-   /* public boolean fjernHvis(Predicate<? super T> p)  // betingelsesfjerning
-    {
-        Objects.requireNonNull(p);                       // kaster unntak
-
-        boolean fjernet = false;
-        for (Iterator<T> i = iterator(); i.hasNext(); )  // løkke
-        {
-            if (p.test(i.next()))                          // betingelsen
-            {
-                i.remove(); fjernet = true;                  // fjerner
-            }
-        }
-        return fjernet;
-} // grensesnitt Beholde
-
-    */
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         //throw new UnsupportedOperationException();
