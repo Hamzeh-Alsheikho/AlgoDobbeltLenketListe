@@ -132,7 +132,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hale = hode;
         } else {
             hale.neste = new Node<>(verdi, hale, null);
-            hale.neste = hale;
+            hale = hale.neste;
 
 
         }
@@ -148,13 +148,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (indeks == 0)                     // ny verdi skal ligge først
         {
             hode = new Node<>(verdi, null, hode);// legges først
+        }
 
-            if (antall == 0)
-                hode = new Node<>(verdi, null, null);      // hode og hale går til samme node
-                hale = hode;
-        } else if (indeks == antall)          // ny verdi skal ligge bakerst
-        {
-            hale.neste = new Node<>(verdi, hale, null);// legges bakerst
+        if (antall == 0){
+            hode = new Node<>(verdi, null, null);      // hode og hale går til samme node
+            hale = hode;
+        } else if (indeks == antall){          // ny verdi skal ligge bakerst
+            hale.neste= new Node<>(verdi, hale, null);// legges bakerst
             hale = hale.neste;
         } else {
             Node<T> p = hode;                  // p flyttes indeks - 1 ganger
@@ -323,7 +323,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         sForward.append('[');
 
-        if (!tom()) {
+
             Node<T> p = hode;
             sForward.append(p.verdi);
 
@@ -334,7 +334,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 sForward.append(',').append(' ').append(p.verdi);
                 p = p.neste;
             }
-        }
+
 
         sForward.append(']');
 
