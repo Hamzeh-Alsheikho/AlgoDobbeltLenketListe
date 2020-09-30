@@ -99,14 +99,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         DobbeltLenketListe<T> sListe = new DobbeltLenketListe<>();
 
-        Node<T> nFra = finnNode(fra);
-        Node<T> nTil = finnNode(til);
 
-        // lag DobbelLenketListe hode nFra hale nTil;
+        for (int i = fra; i < til; i++) {
+            sListe.leggInn( finnNode(i).verdi );
+        }
 
-
-        return null;
+        return sListe;
     }
+
 
     @Override
     public int antall() {
@@ -127,7 +127,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
         if (antall == 0) {
-
             hode = new Node<>(verdi, null, null);
             hale = hode;
         } else {
@@ -143,18 +142,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void leggInn(int indeks, T verdi) {
 
-        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+       Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
         indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
         if (indeks == 0)                     // ny verdi skal ligge først
         {
             hode = new Node<>(verdi, null, hode);// legges først
         }
 
-        if (antall == 0){
+        if (antall == 0) {
             hode = new Node<>(verdi, null, null);      // hode og hale går til samme node
             hale = hode;
-        } else if (indeks == antall){          // ny verdi skal ligge bakerst
-            hale.neste= new Node<>(verdi, hale, null);// legges bakerst
+        } else if (indeks == antall) {          // ny verdi skal ligge bakerst
+            hale.neste = new Node<>(verdi, hale, null);// legges bakerst
             hale = hale.neste;
         } else {
             Node<T> p = hode;                  // p flyttes indeks - 1 ganger
@@ -164,8 +163,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             p.neste = new Node<>(verdi, p.forrige, p.neste);  // verdi settes inn i listen
         }
 
-        antall++;
-        endringer++;// listen har fått en ny verdi
+        antall++;// listen har fått en ny verdi
 
 
         //throw new UnsupportedOperationException();
@@ -178,35 +176,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return indeksTil(verdi) != -1;
     }
 
+    //3a
     @Override
     public T hent(int indeks) {
         indeksKontroll(indeks, false);
         return finnNode(indeks).verdi;
     }
 
-
+    //3a
     private Node<T> finnNode(int indeks) {
 
-        Node<T> p = hode;
-
-        indeksKontroll(indeks, false);
-        if (indeks == 0) {
-
-            return p;
+        Node<T> current = null;
+        
+        if (indeks == 0 && antall == 1) {
+            current = hode;
+            return current;
         }
 
-        if (indeks < antall / 2) {
-            for (int i = 1; i < antall / 2; i++)
-                return p = p.neste;
+        if (indeks == antall - 1)
+            return hale;
+
+        if (indeks <= (int) antall / 2) {
+            current = hode;
+            for (int i = 0; i < indeks; i++)
+                current = current.neste;
+
+        } else {
+            current = hale;
+            for (int j = antall - 1; j > indeks; j--)
+                current = current.forrige;
         }
-        else {
-            for (int j = antall / 2; j < antall - 1; j++) {
-                return p = p.neste;
-            }
-        }
-        return p;
+        return current;
     }
-
 
     @Override
     public int indeksTil(T verdi) {
@@ -221,8 +222,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return -1;
     }
 
+    //3a
     @Override
     public T oppdater(int indeks, T nyverdi) {
+
         Objects.requireNonNull(nyverdi, "Ikke tillatt med null-verdier!");
 
         indeksKontroll(indeks, false);
@@ -231,7 +234,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T gammelVerdi = p.verdi;
 
         p.verdi = nyverdi;
+
+        endringer++;
+
         return gammelVerdi;
+
     }
 
     @Override
@@ -324,16 +331,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         sForward.append('[');
 
 
-            Node<T> p = hode;
-            sForward.append(p.verdi);
+        Node<T> p = hode;
+        sForward.append(p.verdi);
 
+        p = p.neste;
+
+        while (p != null)  // tar med resten hvis det er noe mer
+        {
+            sForward.append(',').append(' ').append(p.verdi);
             p = p.neste;
-
-            while (p != null)  // tar med resten hvis det er noe mer
-            {
-                sForward.append(',').append(' ').append(p.verdi);
-                p = p.neste;
-            }
+        }
 
 
         sForward.append(']');
