@@ -170,10 +170,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
-    @Override // Opg. 3 b.
+    @Override // Oppgave4
     public boolean inneholder(T verdi) {
 
-        return indeksTil(verdi) != -1;
+        if(indeksTil(verdi) != -1)
+            return true;
+
+        else return false;
     }
 
     //3a
@@ -187,7 +190,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private Node<T> finnNode(int indeks) {
 
         Node<T> current = null;
-        
+
         if (indeks == 0 && antall == 1) {
             current = hode;
             return current;
@@ -209,6 +212,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return current;
     }
 
+    //oppgave4
     @Override
     public int indeksTil(T verdi) {
         if (verdi == null) return -1;
