@@ -431,6 +431,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Iterator<T> iterator(int indeks) {
         //throw new UnsupportedOperationException();
+        indeksKontroll(indeks, true);
         return new DobbeltLenketListeIterator(indeks);
     }
 
@@ -448,8 +449,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private DobbeltLenketListeIterator(int indeks) {
             //throw new UnsupportedOperationException();
             denne = (Node<T>) hent(indeks);     // p starter på den første i listen
-            fjernOK = false;  // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+            fjernOK = false;                   // blir sann når next() kalles
+            iteratorendringer = endringer;    // teller endringer
         }
 
         @Override
@@ -461,11 +462,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         public T next() {
             //throw new UnsupportedOperationException();
             Node<T> p = denne;
+            if (iteratorendringer!=endringer){
+                throw new ConcurrentModificationException("");
+            }
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
-
-            fjernOK = true;            // nå kan remove() kalles
-            T denneVerdi = p.verdi;    // tar vare på verdien i p
-            p = p.neste;               // flytter p til den neste noden
+            fjernOK = true;                     // nå kan remove() kalles
+            T denneVerdi = denne.verdi;         // tar vare på verdien i p
+            denne = denne.neste;    // flytter p til den neste noden
 
             return denneVerdi;
         }
@@ -475,31 +478,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             //throw new UnsupportedOperationException();
             Node<T> p = denne;
             if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
+            if (iteratorendringer!=endringer){
+                throw new ConcurrentModificationException("");
+            }
+            fjernOK = false;                   // remove() kan ikke kalles på nytt
+           Node<T> q = hode;                   // hjelpevariabel
 
-            fjernOK = false;               // remove() kan ikke kalles på nytt
-            Node<T> q = hode;              // hjelpevariabel
-
-            if (hode.neste == p)           // skal den første fjernes?
+            if (hode.neste == denne)           // skal den første fjernes?
             {
-                hode = hode.neste;           // den første fjernes
-                if (p == null) hale = null;  // dette var den eneste noden
-            } else {
+
+                hode = hode.neste;              // den første fjernes
+                if (denne == null) hale = null;  // dette var den eneste noden
+            }
+            else
+            {
                 Node<T> r = hode;            // må finne forgjengeren
                 // til forgjengeren til p
-                while (r.neste.neste != p) {
-                    r = r.neste;// flytter r
+                while (r.neste.neste != denne)
+                {
+                    r = r.neste;               // flytter r
                 }
 
                 q = r.neste;                 // det er q som skal fjernes
-                r.neste = p;                 // "hopper" over q
-                if (p == null) hale = r;     // q var den siste
+                r.neste = denne;                 // "hopper" over q
+                if (denne == null) hale = r;     // q var den siste
             }
 
             q.verdi = null;                // nuller verdien i noden
             q.neste = null;                // nuller nestereferansen
 
             antall--;
-
+            endringer--;
+            iteratorendringer--;
         }
 
     } // class DobbeltLenketListeIterator
