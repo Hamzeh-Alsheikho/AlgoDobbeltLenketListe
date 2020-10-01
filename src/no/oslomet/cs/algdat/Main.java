@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-       String[] navn = { "Lars" , "Anders" , "Bodil" , "Kari" , "Per" , "Berit" };
+      /* String[] navn = { "Lars" , "Anders" , "Bodil" , "Kari" , "Per" , "Berit" };
         Liste<String> liste = new DobbeltLenketListe<>(navn);
         liste.forEach(s -> System. out .print(s + " " ));
         System. out .println();
@@ -14,7 +14,7 @@ public class Main {
 // Lars Anders Bodil Kari Per Berit
 
 
-       /*
+       */
         DobbeltLenketListe<String> liste =
                 new DobbeltLenketListe<>( new String[]
                         { "Birger" , "Lars" , "Anders" , "Bodil" , "Kari" , "Per" , "Berit" });
@@ -22,7 +22,7 @@ public class Main {
         System. out .println(liste + " " + liste.omvendtString());
 // Utskrift: [Lars, Anders, Kari, Per] [Per, Kari, Anders, Lars]
 
-        */
+
 }}
 
 

@@ -136,6 +136,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         }
         antall++;
+        endringer++;
         return true;
     }
 
@@ -345,7 +346,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         antall--;                            // reduserer antallet
         return temp;*/
-      return fjern(0);
+        endringer++;
+        return fjern(indeks);
     }
 
     @Override
@@ -361,6 +363,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         hode = hale = null;
         antall = 0;
+        endringer++;
         // Alternative 1
         // This elternative is the best in time condtions, 15ms,
         // because it dosen't run throw the array evey single time.
@@ -396,14 +399,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public String omvendtString() {
 
-        StringBuilder sBackwards = new StringBuilder();
+      /*  StringBuilder sBackwards = new StringBuilder();
 
         if (tom())
             return "[]";
 
         sBackwards.append('[');
 
-        if (!tom()) {
+       // if (!tom()) {
             Node<T> q = hale;
             sBackwards.append(q.verdi);
 
@@ -415,7 +418,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 q = q.forrige;
 
             }
+        //}
+
+        sBackwards.append(']');
+
+        return sBackwards.toString();
+
+       */
+        StringBuilder sBackwards = new StringBuilder();
+
+        if (tom())
+            return "[]";
+
+        sBackwards.append('[');
+
+
+        Node<T> p = hale;
+        sBackwards.append(p.verdi);
+
+        p = p.forrige;
+
+        while (p != null)  // tar med resten hvis det er noe mer
+        {
+            sBackwards.append(',').append(' ').append(p.verdi);
+            p = p.forrige;
         }
+
 
         sBackwards.append(']');
 
@@ -508,8 +536,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             q.neste = null;                // nuller nestereferansen
 
             antall--;
-            endringer--;
-            iteratorendringer--;
+            endringer++;
+            iteratorendringer++;
         }
 
     } // class DobbeltLenketListeIterator
