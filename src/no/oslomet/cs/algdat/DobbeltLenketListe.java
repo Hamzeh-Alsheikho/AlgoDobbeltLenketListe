@@ -36,6 +36,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private Node(T verdi) {
             this(verdi, null, null);
         }
+
+        //new
+        private Node(){
+            this(null,null,null);
+        }
     }
 
     // instansvariabler
@@ -454,7 +459,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Iterator<T> iterator(int indeks) {
         //throw new UnsupportedOperationException();
-        indeksKontroll(indeks, true);
+        indeksKontroll(indeks, false);
         return new DobbeltLenketListeIterator(indeks);
     }
 
@@ -471,7 +476,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         private DobbeltLenketListeIterator(int indeks) {
             //throw new UnsupportedOperationException();
-            denne = (Node<T>) hent(indeks);     // p starter på den første i listen
+            denne = finnNode(indeks);     // p starter på den første i listen
             fjernOK = false;                   // blir sann når next() kalles
             iteratorendringer = endringer;    // teller endringer
         }
@@ -484,7 +489,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public T next() {
             //throw new UnsupportedOperationException();
-            Node<T> p = denne;
+            Node<T> p = hode;
             if (iteratorendringer!=endringer){
                 throw new ConcurrentModificationException("");
             }
@@ -499,13 +504,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public void remove() {
             //throw new UnsupportedOperationException();
-            Node<T> p = denne;
+           /* Node<T> p = denne;
+
             if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
             if (iteratorendringer!=endringer){
                 throw new ConcurrentModificationException("");
             }
             fjernOK = false;                   // remove() kan ikke kalles på nytt
-           Node<T> q = hode;                   // hjelpevariabel
+            Node<T> q = hode;                   // hjelpevariabel
             if (hode.neste == denne)           // skal den første fjernes?
             {
                 hode = hode.neste;              // den første fjernes
@@ -522,31 +528,60 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 }
                 q = r.neste;                              // det er q som skal fjernes
                 r.neste = denne;                            // "hopper" over q
-
                 if (denne == null) hale = r;             // q var den siste
             }
+
 
             q.verdi = null;                // nuller verdien i noden
             q.neste = null;                // nuller nestereferansen
 
-
-           /* if (antall==1){
-                hode=hale=null;
+             */
+            //Node<T> p = denne;
+            Node<T> delete = new Node<T>();
+            if (!fjernOK) throw new IllegalStateException("Ulovlig tilstand!");
+            if (iteratorendringer!=endringer){
+                throw new ConcurrentModificationException("");
             }
-            else if (denne==null){
-
-            }else if (denne.forrige==hode){
-
-            }else {
-                Node<T> current = hode;
+            fjernOK = false;
+            if (antall==0){
+            throw new IllegalArgumentException("Arrays is epmty");
             }
+            if (antall==1){
+                hode.neste=null;
+                hale.forrige=null;
 
+                antall--;
+                endringer++;
+                iteratorendringer++;
+            }
+            if (denne==null){
+               delete=hale.forrige;
+               hale.forrige=delete.forrige;
+               delete.forrige.neste=null;
 
-            */
+                antall--;
+                endringer++;
+                iteratorendringer++;
+            }
+            else if (hode.neste.neste.equals(denne)){
+                hode.neste=denne;
+                denne.forrige=null;
 
-            antall--;
-            endringer++;
-            iteratorendringer++;
+                antall--;
+                endringer++;
+                iteratorendringer++;
+
+            } else if (hode.neste.equals(denne)) {
+                //throw new IllegalArgumentException("");
+            } else {
+                delete = denne.forrige;
+                delete.forrige.neste=denne;
+                denne.forrige = delete.forrige;
+
+                antall--;
+                endringer++;
+                iteratorendringer++;
+            }
         }
 
     } // class DobbeltLenketListeIterator
