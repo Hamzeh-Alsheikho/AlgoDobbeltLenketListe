@@ -276,41 +276,45 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean fjern(T verdi) {
 
-        Node<T> q = null, p = null, r = null;
-
         if (verdi == null)
-            return false;
+            return false;                               // ingen nullverdier i listen
 
-        if (q == null) return false;
+        Node<T> current = hode, nCurrent = hode.neste, helpNum = null;        // hjelpepekere
 
-        //Node<T> q = hode, p, r;
-
-        while (q != null)
+        while (current != null)                         // q skal finne verdien t
         {
-            if (q.verdi.equals(verdi)) break;
-            p =
-            q = q.neste;
+            if (current.verdi.equals(verdi))
+                break;                                  // verdien funnet
+
+            helpNum = current;
+            current = current.neste;
+
         }
 
-        if (q == null) return false;
+        if (current == null)
+            return false;                               // fant ikke verdi
 
-        else if (q == hode)
+        else if (current == hode) {
             hode = hode.neste;
+            //     hode.forrige = null;
+        }
 
-        else
-            p.neste = q.neste;
+        else helpNum.neste = current.neste;
 
-        if (q == hale)
-            hale = p;
+        if (current == hale) {
+            hale = current.forrige;
+            hale.neste = null;
+        }
 
-        q.verdi = null;
-        q.neste = null;
+        current.verdi = null;                           // nuller verdien til q
+        current.neste = null;                           // nuller nestepeker
+        current.forrige = null;
 
         antall--;
-        endringer ++;
+        endringer++;// en node mindre i listen
+
         return true;
     }
-
     //Oppgave6
     @Override
     public T fjern(int indeks) {
@@ -319,53 +323,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         T deleteValue = null;
         Node<T> current = null;
+        Node<T> prev = null;
 
 
-        if(antall == 0)
+        if (antall == 0)
             throw new NoSuchElementException("Liste er tom");
+
 
         if (indeks == 0 && antall == 1) {
 
             deleteValue = finnNode(0).verdi;
             hode = null;
             hale = null;
-            //return deleteValue;
-        }
 
-        else if (indeks == 0 && antall > 0)
+        } else if (indeks == 0 && antall == 2) {
+            deleteValue = finnNode(0).verdi;
+            hale = hode;
+            hode.forrige = null;
+            hale.neste = null;
 
-        {
+        } else if (indeks == 0 && antall > 2) {
             deleteValue = finnNode(0).verdi;
             current = hode.neste;
-            hode = current;
-            current = current.neste;
             current.forrige = null;
+            hode = current;
 
-            //return deleteValue;
-
-        }
-        else if (indeks == antall -1 )
-        {
-            deleteValue = finnNode(antall-1).verdi;
-            current = hale.forrige;
-            hale.forrige = current.forrige;
-            hale.neste = null;
-            hale = current;
-
-            //return deleteValue;
+        } else if (indeks == antall - 1) {
+            deleteValue = finnNode(indeks).verdi;
+            prev = hale.forrige;
+            hale.forrige = prev.forrige;
+            prev.neste = null;
+            hale = prev;
 
 
         } else {
 
-            Node<T> prev = null;
             current = hode;
-            for (int i = 1; i < antall -1 ; i++)
+            for (int i = 1; i <= indeks; i++)
                 current = current.neste;
             prev = current.forrige;
 
             deleteValue = finnNode(indeks).verdi;
+
             prev.neste = current.neste;
-            current.forrige = prev;
+            current.neste.forrige = prev;
         }
 
         antall--;
