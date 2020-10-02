@@ -24,8 +24,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
      * @param <T>
      */
     private static final class Node<T> {
-        private T verdi;                   // nodens verdi
-        private Node<T> forrige, neste;    // pekere
+        private T verdi;
+        private Node<T> forrige, neste;
 
         private Node(T verdi, Node<T> forrige, Node<T> neste) {
             this.verdi = verdi;
@@ -40,10 +40,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     // instansvariabler
-    private Node<T> hode;          // peker til den første i listen
-    private Node<T> hale;          // peker til den siste i listen
-    private int antall;            // antall noder i listen
-    private int endringer;         // antall endringer i listen
+    private Node<T> hode;
+    private Node<T> hale;
+    private int antall;
+    private int endringer;
 
     public DobbeltLenketListe() {
         hode = null;
@@ -80,15 +80,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static void fratilKontroll(int antall, int fra, int til) {
-        if (fra < 0)                                  // fra er negativ
+        if (fra < 0)
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
 
-        if (til > antall)                          // til er utenfor tabellen
+        if (til > antall)
             throw new IndexOutOfBoundsException
                     ("til(" + til + ") > antall(" + antall + ")");
 
-        if (fra > til)                                // fra er større enn til
+        if (fra > til)
             throw new IllegalArgumentException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
     }
@@ -144,7 +144,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
 
-        indeksKontroll(indeks, true);  // Se Liste, true: indeks = antall er lovlig
+        indeksKontroll(indeks, true);
 
 
         if (indeks == 0 && antall == 0){
@@ -158,7 +158,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         else if(indeks == 0 && antall > 0){
             hode = finnNode(0);
             Node<T> current = hode;
-            Node<T> nNode = new Node<>(verdi, null, current);// legges først
+            Node<T> nNode = new Node<>(verdi, null, current);
             nNode.neste = current;
             current.forrige = nNode;
             hode = nNode;
@@ -166,7 +166,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-        else if (indeks == antall)           // ny verdi skal ligge bakerst
+        else if (indeks == antall)
         {
             Node<T> nNode = new Node<>(verdi, hale, null);
             if (hale != null) {
@@ -179,7 +179,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         } else {
 
             Node<T> prev = null;
-            Node<T> current = hode;                 // p flyttes indeks - 1 ganger
+            Node<T> current = hode;
             for (int i = 1; i < indeks; i++)
                 current = current.neste;
             prev = current;
@@ -279,36 +279,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> q = null, p = null, r = null;
 
         if (verdi == null)
-            return false;          // ingen nullverdier i listen
+            return false;
 
-        if (q == null) return false;// fant ikke verdi
+        if (q == null) return false;
 
-        //Node<T> q = hode, p, r;               // hjelpepekere
+        //Node<T> q = hode, p, r;
 
-        while (q != null)                         // q skal finne verdien t
+        while (q != null)
         {
-            if (q.verdi.equals(verdi)) break;       // verdien funnet
+            if (q.verdi.equals(verdi)) break;
             p =
-            q = q.neste;                     // p er forgjengeren til q
+            q = q.neste;
         }
 
-        if (q == null) return false;// fant ikke verdi
+        if (q == null) return false;
 
         else if (q == hode)
-            hode = hode.neste;    // går forbi q
+            hode = hode.neste;
 
         else
-            p.neste = q.neste;                   // går forbi q
+            p.neste = q.neste;
 
         if (q == hale)
-            hale = p;                  // oppdaterer hale
+            hale = p;
 
-        q.verdi = null;                           // nuller verdien til q
-        q.neste = null;                           // nuller nestepeker
+        q.verdi = null;
+        q.neste = null;
 
-        antall--;                                 // en node mindre i listen
+        antall--;
         endringer ++;
-        return true;                              // vellykket fjerning
+        return true;
     }
 
     //Oppgave6
@@ -465,16 +465,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private int iteratorendringer;
 
         private DobbeltLenketListeIterator() {
-            denne = hode;     // p starter på den første i listen
-            fjernOK = false;  // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+            denne = hode;
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         private DobbeltLenketListeIterator(int indeks) {
             //throw new UnsupportedOperationException();
-            denne = finnNode(indeks);     // p starter på den første i listen
-            fjernOK = false;                   // blir sann når next() kalles
-            iteratorendringer = endringer;    // teller endringer
+            denne = finnNode(indeks);
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         @Override
@@ -489,9 +489,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 throw new ConcurrentModificationException("");
             }
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
-            fjernOK = true;                     // nå kan remove() kalles
-            T denneVerdi = denne.verdi;         // tar vare på verdien i p
-            denne = denne.neste;    // flytter p til den neste noden
+            fjernOK = true;
+            T denneVerdi = denne.verdi;
+            denne = denne.neste;
 
             return denneVerdi;
         }
