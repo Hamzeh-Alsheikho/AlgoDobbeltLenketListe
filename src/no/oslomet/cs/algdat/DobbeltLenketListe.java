@@ -132,8 +132,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         } else {
             hale.neste = new Node<>(verdi, hale, null);
             hale = hale.neste;
-
-
         }
         antall++;
         endringer++;
@@ -398,33 +396,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
-
-      /*  StringBuilder sBackwards = new StringBuilder();
-
-        if (tom())
-            return "[]";
-
-        sBackwards.append('[');
-
-       // if (!tom()) {
-            Node<T> q = hale;
-            sBackwards.append(q.verdi);
-
-            q = q.forrige;
-
-            while (q != null)  // tar med resten hvis det er noe mer
-            {
-                sBackwards.append(',').append(' ').append(q.verdi);
-                q = q.forrige;
-
-            }
-        //}
-
-        sBackwards.append(']');
-
-        return sBackwards.toString();
-
-       */
         StringBuilder sBackwards = new StringBuilder();
 
         if (tom())
@@ -511,29 +482,43 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
             fjernOK = false;                   // remove() kan ikke kalles på nytt
            Node<T> q = hode;                   // hjelpevariabel
-
             if (hode.neste == denne)           // skal den første fjernes?
             {
-
                 hode = hode.neste;              // den første fjernes
+               // Hode piker backover
+                hode.forrige=null;
                 if (denne == null) hale = null;  // dette var den eneste noden
             }
             else
             {
-                Node<T> r = hode;            // må finne forgjengeren
-                // til forgjengeren til p
-                while (r.neste.neste != denne)
-                {
-                    r = r.neste;               // flytter r
+                Node<T> r = hode;                       // må finne forgjengeren
+                                                        // til forgjengeren til p
+                while (r.neste.neste != denne) {
+                    r = r.neste;                        // flytter r
                 }
+                q = r.neste;                              // det er q som skal fjernes
+                r.neste = denne;                            // "hopper" over q
 
-                q = r.neste;                 // det er q som skal fjernes
-                r.neste = denne;                 // "hopper" over q
-                if (denne == null) hale = r;     // q var den siste
+                if (denne == null) hale = r;             // q var den siste
             }
 
             q.verdi = null;                // nuller verdien i noden
             q.neste = null;                // nuller nestereferansen
+
+
+           /* if (antall==1){
+                hode=hale=null;
+            }
+            else if (denne==null){
+
+            }else if (denne.forrige==hode){
+
+            }else {
+                Node<T> current = hode;
+            }
+
+
+            */
 
             antall--;
             endringer++;
