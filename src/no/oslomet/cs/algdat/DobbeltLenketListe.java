@@ -314,38 +314,62 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T fjern(int indeks) {
 
-      /*  indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+        indeksKontroll(indeks, false);
+
+        T deleteValue = null;
+        Node<T> current = null;
+
 
         if(antall == 0)
-            return
+            throw new NoSuchElementException("Liste er tom");
 
+        if (indeks == 0 && antall == 1) {
 
-
-        T temp;                              // hjelpevariabel
-
-        if (indeks == 0)                     // skal første verdi fjernes?
-        {
-            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
-            hode = hode.neste;                 // hode flyttes til neste node
-
-         if (antall == 1)
-             hale = null;      // det var kun en verdi i listen
-        } else {
-            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
-            Node<T> q = p.neste;                       // q skal fjernes
-            Node<T> r = q.neste;
-           // temp = q.verdi;                    // tar vare på verdien som skal fjernes
-
-            if (q == hale)
-                hale = p;           // q er siste node
-            p.neste = r;                        // "hopper over" q
-            r.forrige = p;
+            deleteValue = finnNode(0).verdi;
+            hode = null;
+            hale = null;
+            //return deleteValue;
         }
 
-        antall--;                            // reduserer antallet
-        return temp;*/
+        else if (indeks == 0 && antall > 0)
+
+        {
+            deleteValue = finnNode(0).verdi;
+            current = hode.neste;
+            hode = current;
+            current = current.neste;
+            current.forrige = null;
+
+            //return deleteValue;
+
+        }
+        else if (indeks == antall -1 )
+        {
+            deleteValue = finnNode(antall-1).verdi;
+            current = hale.forrige;
+            hale.forrige = current.forrige;
+            hale.neste = null;
+            hale = current;
+
+            //return deleteValue;
+
+
+        } else {
+
+            Node<T> prev = null;
+            current = hode;
+            for (int i = 1; i < antall -1 ; i++)
+                current = current.neste;
+            prev = current.forrige;
+
+            deleteValue = finnNode(indeks).verdi;
+            prev.neste = current.neste;
+            current.forrige = prev;
+        }
+
+        antall--;
         endringer++;
-        return fjern(indeks);
+        return deleteValue;
     }
 
     @Override
