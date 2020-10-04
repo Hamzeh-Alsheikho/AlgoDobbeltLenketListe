@@ -535,6 +535,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         //throw new UnsupportedOperationException();
+       //public static  <T> void sort(liste<T> value, T begeb, T end, Komperto, c){
+
+        //int begen=0;
+        //int end=0;
+        //int current_min = begen;
+        //int
+        int currentMax = liste.antall();
+        int index = 0;
+        for (int i= liste.antall(); i> i; i++){      // loke for all the list
+
+            for (int indexes = 0; indexes<i;indexes++){    // loke for the max
+                 index= currentMax;                         //Update the index
+                 currentMax=indexes;                        // Update the current
+            }
+
+
+       }
+
     }
 
 
