@@ -46,7 +46,8 @@ Both method should return "[]" when liste has no value. So we put if statement o
 * Oppgave 3: Firstly, we need to have some help variable for Node what we wanted to find. Then we had to think several patterns.
 1). When Node is the head.
 2). When Node is the tail.
-3). When Node is smaller than the half of number ( antall / 2 ) in the list, then search from head to the the half of number(antall / 2). If antall /2 became decimal, it made a problem later.
+3). When Node is smaller than the half of number ( antall / 2 ) in the list, then search from head to the the half of number(antall / 2). 
+If antall /2 became decimal, it made a problem later.
 So we put (int) antall/2 for judgement number.
 4). When Node is bigger than the half of number ( antall / 2 ), the Node would be searched from tail to the half of number.
 
@@ -61,7 +62,6 @@ so we had to connect variable from tail to head. There were several patterns whe
 2). When a Node added to head of the list.
 3). When a node added to tail of the list.
 4). When a node added in the middle of the list.
-
 After adding a Node, numbers of the list should add 1 and changing also increased.
  
 
