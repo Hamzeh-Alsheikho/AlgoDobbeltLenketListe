@@ -37,5 +37,41 @@ if (a == null) {
 throw new NullPointerException ("The table is null");
 
 
-* Oppgave 2: ...
+* Oppgave 2:  The code for String toString() was found from Oppgaver til Avsnitt 3.3.2.2. It is for EnkeltLenketListe but
+the logic for Doubbeltlenketliste in ascending order is the same. So we used it for String toString().
+About String omvendtString() this is print out liste from back to front. EnkeltLenketListe has a link from head to tale and String toString() had Node<T> p = hode; p = p.neste;.
+So we thought if we changed Node<T> p = hale; p = p.forrige; in omvendtString, it should work. Then we tried and it worked.
+Both method should return "[]" when liste has no value. So we put if statement on the top of the code.
 
+* Oppgave 3: Firstly, we need to have some help variable for Node what we wanted to find. Then we had to think several patterns.
+1). When Node is the head.
+2). When Node is the tail.
+3). When Node is smaller than the half of number ( antall / 2 ) in the list, then search from head to the the half of number(antall / 2). If antall /2 became decimal, it made a problem later.
+So we put (int) antall/2 for judgement number.
+4). When Node is bigger than the half of number ( antall / 2 ), the Node would be searched from tail to the half of number.
+
+hent(int indeks) was easy to code, we had already have finnNode() method, so find the node for int indeks then return value of that indeks.
+
+* Oppgave 4: 
+
+
+* Oppgave 5:
+
+
+* Oppgave 6:
+
+
+* Oppgave 7:
+
+
+* Oppgave 8:
+
+
+* Oppgave 9:
+
+
+* Oppgave 10:
+
+
+
+ 
