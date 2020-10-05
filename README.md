@@ -55,8 +55,15 @@ hent(int indeks) was easy to code, we had already have finnNode() method, so fin
 * Oppgave 4: 
 
 
-* Oppgave 5:
+* Oppgave 5: For this oppgave, idea came from Kompedium Programkode 3.3.2 f), but this code was for EnkeltLenketListe, 
+so we had to connect variable from tail to head. There were several patterns when a Node added.
+1). When the list was blank from before adding
+2). When a Node added to head of the list.
+3). When a node added to tail of the list.
+4). When a node added in the middle of the list.
 
+After adding a Node, numbers of the list should add 1 and changing also increased.
+ 
 
 * Oppgave 6:
 
