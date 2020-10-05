@@ -510,27 +510,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         //throw new UnsupportedOperationException();
-       //public static  <T> void sort(liste<T> value, T begeb, T end, Komperto, c){
 
-        //int begen=0;
-        //int end=0;
-        //int current_min = begen;
-        //int
-        int currentMax = liste.antall();
-        int index = 0;
-        for (int i= liste.antall(); i> i; i++){      // loke for all the list
-
-            for (int indexes = 0; indexes<i;indexes++){    // loke for the max
-                 index= currentMax;                         //Update the index
-                 currentMax=indexes;                        // Update the current
+        for(int i = liste.antall(); i > 0; i--) { // Vi loper gjenom hele array
+            Iterator<T> ite = liste.iterator(); // Vi kaller iteratoren
+            T max= ite.next();
+            int maxIndeks = 0;
+            for (int j = 1; j < i; j++) { // Double array for kvadratisk orden
+                T temp = ite.next();
+                if (c.compare(temp,max)<0){ // Vi samenligene arrayet med segselv
+                    max = temp;
+                    maxIndeks= j;
+                }
             }
-
-
-       }
-
+        }
     }
-
-
 } // class DobbeltLenketListe
 
 
