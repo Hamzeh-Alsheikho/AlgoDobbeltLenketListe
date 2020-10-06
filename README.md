@@ -16,6 +16,7 @@ Se oblig-tekst for alle krav. Oppgaver som ikke oppfyller følgende vil ikke få
 Oppgaven er levert av følgende studenter:
 * Navn Navnesen, S981737, s981737@oslomet.no
 * Maja Åskov Tengstedt, s196074,  s196074@oslomet.no
+* Hitomi Schiefloe, s344214, s344214@oslomet.no
 
 Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
 
@@ -36,11 +37,12 @@ if (a == null) {
 throw new NullPointerException ("The table is null");
 
 
-* Oppgave 2:  The code for String toString() was found from Oppgaver til Avsnitt 3.3.2.2. It is for EnkeltLenketListe but
+* Oppgave 2:  The code for String toString() was found from Oppgaver to Avsnitt 3.3.2.2. It is for EnkeltLenketListe but
 the logic for Doubbeltlenketliste in ascending order is the same. So we used it for String toString().
-About String omvendtString() this is print out liste from back to front. EnkeltLenketListe has a link from head to tale and String toString() had Node<T> p = hode; p = p.neste;.
+About String omvendtString() this is print out list from back to front. EnkeltLenketListe has a link from head to tale and String toString() had Node<T> p = hode; p = p.neste;.
 So we thought if we changed Node<T> p = hale; p = p.forrige; in omvendtString, it should work. Then we tried and it worked.
-Both method should return "[]" when liste has no value. So we put if statement on the top of the code.
+Both method should return "[]" when list has no value. So we put if statement on the top of the code.
+
 
 * Oppgave 3: Firstly, we need to have some help variable for Node what we wanted to find. Then we had to think several patterns.
 1). When Node is the head.
@@ -49,10 +51,15 @@ Both method should return "[]" when liste has no value. So we put if statement o
 If antall /2 became decimal, it made a problem later.
 So we put (int) antall/2 for judgement number.
 4). When Node is bigger than the half of number ( antall / 2 ), the Node would be searched from tail to the half of number.
+hent(int indeks) was easy to code, we had already have finnNode() method, so find the node for int index then return value of that index.
 
-hent(int indeks) was easy to code, we had already have finnNode() method, so find the node for int indeks then return value of that indeks.
 
 * Oppgave 4: 
+A goal for public int indeksTil(T verdi) is to find index for value which in the list or not. If value is null, return -1. If  value is not null,
+search the value in the list with forløkka. If the value is existing in the list, return index, if not exist in the list return -1.
+For public boolean inneholder(T verdi), it has to return true or false if the value in the list or not.
+In indeksTil method, if the value is not in the list return -1, this means if indeksTil(verdi) does not return -1, the value exist in the list.
+Then boolean inneholder should return true, follows description.
 
 
 * Oppgave 5: For this oppgave, idea came from Kompedium Programkode 3.3.2 f), but this code was for EnkeltLenketListe, 
@@ -79,6 +86,7 @@ The code had to consider for 4 cases.
 For boolean methods return false and true. 
 For public T fjern, return value that would be removed.
 
+
 * Oppgave 7:
 Vi defener hode og hale og så løber vi gjennom hele arrayet med while lokke 
 og nulstillet nodene, til slutt hode er null
@@ -92,6 +100,7 @@ og hale er null og de er like null. Vi opdetere anttal og vi øke endringerene.
  4). antall = 0;
      endringer++;
 
+
 * Oppgave 8:
 Denne oppgave er delt i mange deler 
 Først- koder vi T next
@@ -104,10 +113,14 @@ finnnode -index.
 Siste koder vi iteratoren for indeks
 
 Mest av koden var fra kompendumen.
+
+
 * Oppgave 9:
 
 
 * Oppgave 10:
+
+
 
 
 
