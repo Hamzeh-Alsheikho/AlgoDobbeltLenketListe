@@ -15,16 +15,15 @@ Se oblig-tekst for alle krav. Oppgaver som ikke oppfyller følgende vil ikke få
 
 Oppgaven er levert av følgende studenter:
 * Navn Navnesen, S981737, s981737@oslomet.no
-* ...
+* Maja Åskov Tengstedt, s196074,  s196074@oslomet.no
 
 Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
-* Per har hatt hovedansvar for oppgave 1, 3, og 5. 
-* Else har hatt hovedansvar for oppgave 2, 4, og 6. 
-* Fatima har hatt hovedansvar for oppgave 7 og 8. 
-* Vi har i fellesskap løst oppgave 10. 
-
+* Maja har hatt hovedansvar for oppgave 1, 2, og 6. 
+* Hitomi har hatt hovedansvar for oppgave 3, 4, og 5. 
+* Hamzeh har hatt hovedansvar for oppgave 7, 8, 9 og 10. 
+ 
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
 * Oppgave 1: The biggest challenges in task 1 were to get value with zero not to be counted in a. 
@@ -66,7 +65,19 @@ After adding a Node, numbers of the list should add 1 and changing also increase
  
 
 * Oppgave 6:
-
+public boolean fjern(T verdi). 
+First code was full of mistakes, then we tried to imporove the code. 
+But it failed test 6n( removing a node from the middle of the list.) 
+We used debug and found the a few problems. 
+When recoding node.forrige.nexte, got Nullpointexception. 
+The code was made clean and visible. 
+The code had to consider for 4 cases. 
+1). When a node is remove value and numbers in the list was none. 
+2). When a node remove from head in the list. 
+3). When a node remove from tail in the list. 
+4). When a node remove from the middle of the list. 
+For boolean methods return false and true. 
+For public T fjern, return value that would be removed.
 
 * Oppgave 7:
 Vi defener hode og hale og så løber vi gjennom hele arrayet med while lokke 
