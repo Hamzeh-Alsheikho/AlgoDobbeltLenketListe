@@ -69,11 +69,30 @@ After adding a Node, numbers of the list should add 1 and changing also increase
 
 
 * Oppgave 7:
-
+Vi defener hode og hale og så løber vi gjennom hele arrayet med while lokke 
+og nulstillet nodene, til slutt hode er null
+og hale er null og de er like null. Vi opdetere anttal og vi øke endringerene.
+ 1). p = q.neste;
+ 2). q.neste = null;
+     q.verdi = null;
+     q = p;
+        }
+ 3). hode = hale = null;
+ 4). antall = 0;
+     endringer++;
 
 * Oppgave 8:
+Denne oppgave er delt i mange deler 
+Først- koder vi T next
 
+Andre- koder vi iteratoren
 
+Trjed- lager vi konstruktoren 
+Konstrakuten er akkurate det samme som tideglere konstraktur men denne node skal peke på
+finnnode -index.
+Siste koder vi iteratoren for indeks
+
+Mest av koden var fra kompendumen.
 * Oppgave 9:
 
 
