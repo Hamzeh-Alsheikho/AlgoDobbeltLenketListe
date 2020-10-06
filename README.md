@@ -103,7 +103,7 @@ og hale er null og de er like null. Vi opdetere anttal og vi øke endringerene.
 
 * Oppgave 8:
 Denne oppgave er delt i mange deler 
-Først- koder vi T next
+Først- koder vi T next methode
 
 Andre- koder vi iteratoren
 

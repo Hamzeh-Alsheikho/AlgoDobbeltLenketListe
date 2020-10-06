@@ -510,17 +510,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         for (int i = liste.antall(); i > 0; i--) { // Vi loper gjenom hele array
             Iterator<T> ite = liste.iterator(); // Vi kaller iteratoren
-            T max = ite.next();
+            T maxVerdi = ite.next();
             int maxIndeks = 0;
             for (int j = 1; j < i; j++) { // Double array for kvadratisk orden
                 T temp = ite.next();
-                if (c.compare(temp, max) < 0) { // Vi samenligene arrayet med segselv
-                    max = temp;
-                    maxIndeks = j;
+                if (c.compare(temp, maxVerdi) < 0) { // Vi samenligene arrayet med segselv
+                    maxVerdi = temp;                   //Vi opdeterer  verdien
+                    maxIndeks = j;                      // Oppdeterer index
                 }
             }
-        }
-    }
+        liste.leggInn(liste.fjern(maxIndeks)); // Sorter Makes verdi baksest
+    }}
 } // class DobbeltLenketListe
 
 
