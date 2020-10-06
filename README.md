@@ -103,17 +103,18 @@ og hale er null og de er like null. Vi opdetere anttal og vi øke endringerene.
 
 * Oppgave 8:
 Denne oppgave er delt i mange deler 
-Først- koder vi T next methode
-
-Andre- koder vi iteratoren
-
-Trjed- lager vi konstruktoren 
+A) koder vi T next methode 
+sjekker iteratorendringer
+Denne motoden kaster to untakk, ConcurrentModificationException og NoSuchElementException
+plus fjenverdien, så har vi tull slutt den nye verdien.
+B) koder vi iteratoren
+Vi reurener DobbeltLenketListeIterator.
+C) lager vi konstruktoren.
 Konstrakuten er akkurate det samme som tideglere konstraktur men denne node skal peke på
 finnnode -index.
-Siste koder vi iteratoren for indeks
-
+D) koder vi iteratoren for indeks
+Vi sjekke om indeksKontroll er fels og vi retunerer indeksen til DobbeltLenketListeIterator
 Mest av koden var fra kompendumen.
-
 
 * Oppgave 9:
 

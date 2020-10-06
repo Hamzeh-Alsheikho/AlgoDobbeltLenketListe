@@ -519,8 +519,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     maxIndeks = j;                      // Oppdeterer index
                 }
             }
-        liste.leggInn(liste.fjern(maxIndeks)); // Sorter Makes verdi baksest
-    }}
+            liste.leggInn(liste.fjern(maxIndeks)); // Sorter Makes verdi baksest
+        }
+    }
 } // class DobbeltLenketListe
 
 
