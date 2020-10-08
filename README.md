@@ -14,9 +14,9 @@ Se oblig-tekst for alle krav. Oppgaver som ikke oppfyller følgende vil ikke få
 # Arbeidsfordeling
 
 Oppgaven er levert av følgende studenter:
-* Navn Navnesen, S981737, s981737@oslomet.no
 * Maja Åskov Tengstedt, s196074,  s196074@oslomet.no
 * Hitomi Schiefloe, s344214, s344214@oslomet.no
+* Hamzeh Alsheikho, s339572, s339572@oslomet.no
 
 Vi har brukt git til å dokumentere arbeidet vårt. Vi har 16 commits totalt, og hver logg-melding beskriver det vi har gjort av endringer.
 
@@ -25,6 +25,22 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Hitomi har hatt hovedansvar for oppgave 3, 4, og 5. 
 * Hamzeh har hatt hovedansvar for oppgave 7, 8, 9 og 10. 
  
+ *WARNING:
+ You might not pass all the test.
+ Get fail code : Oppgave 6zg: Ineffektiv kode! Har du kodet den ene fjern-metoden
+ ved hjelp av den andre? Eller så er en av fjern-metodene dine litt treg.
+ Pass all the test with Hitomi's PC, run 10 times and passed 10 times.
+ This kind of delay was accepted after we talked to TA Aslak since it dependes on PC rather thatn code:
+ 
+ " Passing Test 
+ Hei 🙂
+ Da er nok metoden riktig. Det kan bare være at din pc er kraftigere enn de andre sin. 
+ André har forklart tidligere at det er vanskelig å vite hvor han skal sette grensen på tidsbruk da 
+ datamaskinene har ulik hastighet.
+ Hvis den passerer testen på din maskin, men ikke på de andre på gruppen er den med andre ord bra nok 🙂
+ - Aslak 
+ Aslak Wold
+ Seen by Hitomi Schiefloe at 9:55 AM "
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
 * Oppgave 1: The biggest challenges in task 1 were to get value with zero not to be counted in a. 
@@ -116,13 +132,25 @@ D) koder vi iteratoren for indeks
 Vi sjekke om indeksKontroll er fels og vi retunerer indeksen til DobbeltLenketListeIterator
 Mest av koden var fra kompendumen.
 
+
 * Oppgave 9:
+Denne oppgaven måtte kodes direkte, og tar inne seg kostruktoren fra oppge 8. 
+Vi sjekker flrst om fjeren er ok, og begge endringer & iteratorendringer om de er like så kaster vi untakk
+Vi har tre alternativ her:
+1). Anten noden er i starten.
+2). Noden er i slutten.
+3). Eller noden er i metten soå må hjelpe veriable.
+Denne oppgave var litt forverende så ble insperert av Endre sin video fjren norde i double lenked list.
 
 
 * Oppgave 10:
-
-
-
-
+Denne oppgave var litt vansklig og trikkig, Vi bruker double for loke, så sammenlige arrayet med seg selv 
+ved hjlep av java default temp.
+Vi opdeterer  verdien.
+Oppdeterer index.
+Vi compare (temp, maxVerdi).
+Vi kaller metode legginn for å sende det stoste elemet backest.
+Oppgave ble løst ved hjelp av lærenen.
+Etter den oppgave var ferdig testen har liten feil knyttet til PC, svaret finner du i Warning scission.
 
  
